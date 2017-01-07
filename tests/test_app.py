@@ -10,7 +10,7 @@ class TestApp(object):
 
     def test_basic_content(self):
         response = self.client.get('/')
-        assert response.data == b'Hello World!'
+        assert response.data == b'This is a web service. Nothing to see here!'
         assert response.status_code == 200
 
     def test_moon_info(self):

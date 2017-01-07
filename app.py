@@ -10,7 +10,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "This is a web service. Nothing to see here!"
 
 @app.route('/moon_info')
 def moon_info():
