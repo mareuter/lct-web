@@ -17,7 +17,7 @@ def get_moon_info(date, lat, lon):
 
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
-    print(moon_info.observer)
+    #print(moon_info.observer)
 
     return {"age": moon_info.age(), "colong": moon_info.colong(),
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
