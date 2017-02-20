@@ -19,7 +19,10 @@ def get_moon_info(date, lat, lon):
     moon_info.update(date_tuple)
     #print(moon_info.observer)
 
+    next_four_phases = {str(i): {"phase": phases[0], "datetime": phases[1]}
+                        for i, phases in enumerate(moon_info.next_four_phases())}
+
     return {"age": moon_info.age(), "colong": moon_info.colong(),
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
             "libration_lat": moon_info.libration_lat(), "altitude": moon_info.altitude(),
-            "azimuth": moon_info.azimuth(), "next_four_phases": moon_info.next_four_phases()}
+            "azimuth": moon_info.azimuth(), "next_four_phases": next_four_phases}

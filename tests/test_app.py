@@ -29,5 +29,5 @@ class TestApp(object):
             assert moon_info["azimuth"] == 69.75156520051686
             next_four_phases = moon_info["next_four_phases"]
             assert len(next_four_phases) == 4
-            assert next_four_phases[0][0] == "full"
-            assert next_four_phases[0][1] == [2013, 10, 18, 23, 37, 39.644067962653935]
+            assert next_four_phases["0"]["phase"] == "full"
+            assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.644067962653935]
