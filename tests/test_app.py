@@ -7,6 +7,9 @@ class TestApp(object):
     def setup_class(self):
         self.client = app.test_client()
         self.client.testing = True
+        self.date = 1382158800.0
+        self.latitude = 35.9694444444444
+        self.longitude = -84.316666666666
 
     def test_basic_content(self):
         response = self.client.get('/')
@@ -32,3 +35,14 @@ class TestApp(object):
             assert len(next_four_phases) == 4
             assert next_four_phases["0"]["phase"] == "full"
             assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.644067962653935]
+
+    def test_lunar_club_info(self):
+        with app.test_request_context():
+            lunar_club_info_url = url_for("lunar_club", date=self.date, lat=self.latitude,
+                                          lon=self.longitude)
+            response = self.client.get(lunar_club_info_url)
+            lunar_club_info = json.loads(response.data)
+            assert response.status_code == 200
+            assert lunar_club_info["time_from_new_moon"] == 333.4247006776859
+            assert lunar_club_info["time_to_new_moon"] == 374.8327396878158
+            assert lunar_club_info["time_to_full_moon"] == 0.06781995449273381

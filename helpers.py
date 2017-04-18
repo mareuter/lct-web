@@ -9,6 +9,13 @@ def convert_dec_loc_to_loc_tuple(loc):
     seconds = (minutes - round(minutes)) * 60.0
     return (degrees, round(minutes), round(seconds))
 
+def format_date_and_location(date, lat, lon):
+    d = datetime.fromtimestamp(date)
+    date_tuple = (d.year, d.month, d.day, d.hour, d.minute, d.second)
+    lat_tuple = convert_dec_loc_to_loc_tuple(lat)
+    lon_tuple = convert_dec_loc_to_loc_tuple(lon)
+    return date_tuple, lat_tuple, lon_tuple
+
 def get_moon_info(date, lat, lon):
     d = datetime.fromtimestamp(date)
     date_tuple = (d.year, d.month, d.day, d.hour, d.minute, d.second)
@@ -28,3 +35,13 @@ def get_moon_info(date, lat, lon):
             "libration_lat": moon_info.libration_lat(), "altitude": moon_info.altitude(),
             "azimuth": moon_info.azimuth(), "phase": phase_name,
             "next_four_phases": next_four_phases}
+
+def get_lunar_club_info(date, lat, lon):
+    date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
+
+    moon_info = MoonInfo(lat_tuple, lon_tuple)
+    moon_info.update(date_tuple)
+
+    return {"time_from_new_moon": moon_info.time_from_new_moon(),
+            "time_to_new_moon": moon_info.time_to_new_moon(),
+            "time_to_full_moon": moon_info.time_to_full_moon()}
