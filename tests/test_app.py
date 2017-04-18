@@ -27,6 +27,7 @@ class TestApp(object):
             assert moon_info["libration_lat"] == -1.4788210646482465
             assert moon_info["altitude"] == -9.8149186580585
             assert moon_info["azimuth"] == 69.75156520051686
+            assert moon_info["phase"] == "Waxing Gibbous"
             next_four_phases = moon_info["next_four_phases"]
             assert len(next_four_phases) == 4
             assert next_four_phases["0"]["phase"] == "full"
