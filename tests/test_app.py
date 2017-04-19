@@ -7,7 +7,7 @@ class TestApp(object):
     def setup_class(self):
         self.client = app.test_client()
         self.client.testing = True
-        self.date = 1382158800.0
+        self.date = 1382133600.0
         self.latitude = 35.9694444444444
         self.longitude = -84.316666666666
 
