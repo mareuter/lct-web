@@ -34,7 +34,7 @@ def get_moon_info(date, lat, lon):
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
             "libration_lat": moon_info.libration_lat(), "altitude": moon_info.altitude(),
             "azimuth": moon_info.azimuth(), "phase": phase_name,
-            "next_four_phases": next_four_phases}
+            "next_four_phases": next_four_phases, "date": moon_info.observer.date}
 
 def get_lunar_club_info(date, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
