@@ -24,7 +24,7 @@ def get_moon_info(date, lat, lon):
 
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
-    #print(moon_info.observer)
+    print(moon_info.observer.date)
     phase_name = " ".join(moon_info.phase_name().split('_')).title()
 
     next_four_phases = {str(i): {"phase": phases[0], "datetime": phases[1]}
