@@ -18,8 +18,8 @@ class TestApp(object):
 
     def test_moon_info(self):
         with app.test_request_context():
-            moon_info_url = url_for("moon_info", date=1382158800.0, lat=35.9694444444444,
-                                    lon=-84.316666666666)
+            moon_info_url = url_for("moon_info", date=self.date, lat=self.latitude,
+                                    lon=self.longitude)
             response = self.client.get(moon_info_url)
             moon_info = json.loads(response.data)
             assert response.status_code == 200
