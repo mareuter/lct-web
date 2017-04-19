@@ -17,10 +17,7 @@ def format_date_and_location(date, lat, lon):
     return date_tuple, lat_tuple, lon_tuple
 
 def get_moon_info(date, lat, lon):
-    d = datetime.fromtimestamp(date)
-    date_tuple = (d.year, d.month, d.day, d.hour, d.minute, d.second)
-    lat_tuple = convert_dec_loc_to_loc_tuple(lat)
-    lon_tuple = convert_dec_loc_to_loc_tuple(lon)
+    date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
 
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
