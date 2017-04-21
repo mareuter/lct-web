@@ -30,10 +30,10 @@ class TestApp(object):
             assert moon_info["libration_lat"] == -1.4788210646482465
             assert moon_info["altitude"] == -9.8149186580585
             assert moon_info["azimuth"] == 69.75156520051686
-            assert moon_info["phase"] == "Waxing Gibbous"
+            assert moon_info["phase"] == "Full Moon"
             next_four_phases = moon_info["next_four_phases"]
             assert len(next_four_phases) == 4
-            assert next_four_phases["0"]["phase"] == "full"
+            assert next_four_phases["0"]["phase"] == "full_moon"
             assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.644067962653935]
 
     def test_lunar_club_info(self):
