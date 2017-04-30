@@ -41,4 +41,5 @@ def get_lunar_club_info(date, lat, lon):
 
     return {"time_from_new_moon": moon_info.time_from_new_moon(),
             "time_to_new_moon": moon_info.time_to_new_moon(),
-            "time_to_full_moon": moon_info.time_to_full_moon()}
+            "time_to_full_moon": moon_info.time_to_full_moon(),
+            "fractional_phase": moon_info.fractional_phase()}

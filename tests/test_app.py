@@ -46,3 +46,4 @@ class TestApp(object):
             assert lunar_club_info["time_from_new_moon"] == 333.4247006776859
             assert lunar_club_info["time_to_new_moon"] == 374.8327396878158
             assert lunar_club_info["time_to_full_moon"] == 0.06781995449273381
+            assert lunar_club_info["fractional_phase"] == 0.9998519924481626
