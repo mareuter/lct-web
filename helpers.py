@@ -1,7 +1,7 @@
 from datetime import datetime
 import math
 
-from pylunar import MoonInfo
+from pylunar import LunarFeatureContainer, MoonInfo
 
 def convert_dec_loc_to_loc_tuple(loc):
     degrees = int(loc)
@@ -39,7 +39,29 @@ def get_lunar_club_info(date, lat, lon):
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
 
+    lfc = LunarFeatureContainer("Lunar")
+    lfc.load(moon_info)
+
+    nef = {}
+    bf = {}
+    tf = {}
+    for i, feature in enumerate(lfc):
+        if feature.lunar_club_type == "Naked Eye":
+            nef[str(i)] = list_from_feature(feature)
+        if feature.lunar_club_type == "Binocular":
+            bf[str(i)] = list_from_feature(feature)
+        if feature.lunar_club_type == "Telescope":
+            tf[str(i)] = list_from_feature(feature)
+
     return {"time_from_new_moon": moon_info.time_from_new_moon(),
             "time_to_new_moon": moon_info.time_to_new_moon(),
             "time_to_full_moon": moon_info.time_to_full_moon(),
-            "fractional_phase": moon_info.fractional_phase()}
+            "fractional_phase": moon_info.fractional_phase(),
+            "naked_eye_features": nef,
+            "binocular_features": bf,
+            "telescope_features": tf}
+
+def list_from_feature(feature):
+    fl = [feature.name, feature.latitude, feature.longitude, feature.feature_type,
+          feature.delta_latitude, feature.delta_longitude]
+    return fl
