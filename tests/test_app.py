@@ -50,3 +50,12 @@ class TestApp(object):
             assert len(lunar_club_info["naked_eye_features"]) == 10
             assert len(lunar_club_info["binocular_features"]) == 2
             assert len(lunar_club_info["telescope_features"]) == 0
+
+    def test_lunar_two_info(self):
+        with app.test_request_context():
+            lunar_two_info_url = url_for("lunar_two", date=self.date, lat=self.latitude,
+                                         lon=self.longitude)
+            response = self.client.get(lunar_two_info_url)
+            lunar_two_info = json.loads(response.data)
+            assert response.status_code == 200
+            assert len(lunar_two_info["features"]) == 11

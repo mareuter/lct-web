@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, json, request
 
-from helpers import get_moon_info, get_lunar_club_info
+from helpers import get_moon_info, get_lunar_club_info, get_lunar_two_info
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -28,6 +28,15 @@ def lunar_club():
     lon = float(request.args.get('lon', 0))
 
     json_str = json.dumps(get_lunar_club_info(date, lat, lon))
+    return json_str
+
+@app.route('/lunar_two')
+def lunar_two():
+    date = float(request.args.get('date', 0))
+    lat = float(request.args.get('lat', 0))
+    lon = float(request.args.get('lon', 0))
+
+    json_str = json.dumps(get_lunar_two_info(date, lat, lon))
     return json_str
 
 

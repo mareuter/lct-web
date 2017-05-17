@@ -61,6 +61,21 @@ def get_lunar_club_info(date, lat, lon):
             "binocular_features": bf,
             "telescope_features": tf}
 
+def get_lunar_two_info(date, lat, lon):
+    date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
+
+    moon_info = MoonInfo(lat_tuple, lon_tuple)
+    moon_info.update(date_tuple)
+
+    lfc = LunarFeatureContainer("LunarII")
+    lfc.load(moon_info)
+
+    features = {}
+    for i, feature in enumerate(lfc):
+        features[str(i)] = list_from_feature(feature)
+
+    return {"features": features}
+
 def list_from_feature(feature):
     fl = [feature.name, feature.latitude, feature.longitude, feature.feature_type,
           feature.delta_latitude, feature.delta_longitude]
