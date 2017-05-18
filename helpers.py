@@ -50,7 +50,7 @@ def get_lunar_club_info(date, lat, lon):
             nef[str(i)] = list_from_feature(feature)
         if feature.lunar_club_type == "Binocular":
             bf[str(i)] = list_from_feature(feature)
-        if feature.lunar_club_type == "Telescope":
+        if feature.lunar_club_type == "Telescopic":
             tf[str(i)] = list_from_feature(feature)
 
     return {"time_from_new_moon": moon_info.time_from_new_moon(),
