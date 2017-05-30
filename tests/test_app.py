@@ -18,7 +18,9 @@ class TestApp(object):
 
     def test_moon_info(self):
         with app.test_request_context():
-            moon_info_url = url_for("moon_info", date=self.date, lat=self.latitude,
+            moon_info_url = url_for("moon_info", date=self.date,
+                                    tz='America/New_York',
+                                    lat=self.latitude,
                                     lon=self.longitude)
             response = self.client.get(moon_info_url)
             moon_info = json.loads(response.data)
@@ -35,6 +37,19 @@ class TestApp(object):
             assert len(next_four_phases) == 4
             assert next_four_phases["0"]["phase"] == "full_moon"
             assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.644067962653935]
+            assert moon_info["magnitude"] == -12.63
+            assert moon_info["earth_distance"] == 386484.25078267464
+            assert moon_info["ra"] == 23.331888825304354
+            assert moon_info["dec"] == 10.129795148334347
+            assert moon_info["angular_size"] == 0.5159071519639757
+            assert moon_info["subsolar_lat"] == -0.3366501792590513
+            assert moon_info["elongation"] == 178.56298828125
+            assert moon_info["rise_set_times"]["0"]["time"] == "transit"
+            assert moon_info["rise_set_times"]["0"]["datetime"] == [2013, 10, 18, 0, 43, 21]
+            assert moon_info["rise_set_times"]["1"]["time"] == "set"
+            assert moon_info["rise_set_times"]["1"]["datetime"] == [2013, 10, 18, 7, 22, 18]
+            assert moon_info["rise_set_times"]["2"]["time"] == "rise"
+            assert moon_info["rise_set_times"]["2"]["datetime"] == [2013, 10, 18, 18, 47, 40]
 
     def test_lunar_club_info(self):
         with app.test_request_context():

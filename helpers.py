@@ -16,7 +16,7 @@ def format_date_and_location(date, lat, lon):
     lon_tuple = convert_dec_loc_to_loc_tuple(lon)
     return date_tuple, lat_tuple, lon_tuple
 
-def get_moon_info(date, lat, lon):
+def get_moon_info(date, timezone, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
 
     moon_info = MoonInfo(lat_tuple, lon_tuple)
@@ -27,11 +27,19 @@ def get_moon_info(date, lat, lon):
     next_four_phases = {str(i): {"phase": phases[0], "datetime": phases[1]}
                         for i, phases in enumerate(moon_info.next_four_phases())}
 
+    rise_set_times = {str(i): {"time": times[0], "datetime": times[1]}
+                      for i, times in enumerate(moon_info.rise_set_times(timezone))}
+    # REMOVE when this is called in above function
+    moon_info.update(date_tuple)
+
     return {"age": moon_info.age(), "colong": moon_info.colong(),
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
             "libration_lat": moon_info.libration_lat(), "altitude": moon_info.altitude(),
-            "azimuth": moon_info.azimuth(), "phase": phase_name,
-            "next_four_phases": next_four_phases}
+            "azimuth": moon_info.azimuth(), "ra": moon_info.ra(), "dec": moon_info.dec(),
+            "magnitude": moon_info.magnitude(), "earth_distance": moon_info.earth_distance(),
+            "subsolar_lat": moon_info.subsolar_lat(), "angular_size": moon_info.angular_size(),
+            "elongation": moon_info.elongation(), "phase": phase_name,
+            "next_four_phases": next_four_phases, "rise_set_times": rise_set_times}
 
 def get_lunar_club_info(date, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)

@@ -15,10 +15,11 @@ def hello():
 @app.route('/moon_info')
 def moon_info():
     date = float(request.args.get('date', 0))
+    timezone = str(request.args.get('tz', 'UTC'))
     lat = float(request.args.get('lat', 0))
     lon = float(request.args.get('lon', 0))
 
-    json_str = json.dumps(get_moon_info(date, lat, lon))
+    json_str = json.dumps(get_moon_info(date, timezone, lat, lon))
     return json_str
 
 @app.route('/lunar_club')
