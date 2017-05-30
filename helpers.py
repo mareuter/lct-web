@@ -55,11 +55,11 @@ def get_lunar_club_info(date, lat, lon):
     tf = {}
     for i, feature in enumerate(lfc):
         if feature.lunar_club_type == "Naked Eye":
-            nef[str(i)] = list_from_feature(feature)
+            nef[str(i)] = feature.list_from_feature()
         if feature.lunar_club_type == "Binocular":
-            bf[str(i)] = list_from_feature(feature)
+            bf[str(i)] = feature.list_from_feature()
         if feature.lunar_club_type == "Telescopic":
-            tf[str(i)] = list_from_feature(feature)
+            tf[str(i)] = feature.list_from_feature()
 
     return {"time_from_new_moon": moon_info.time_from_new_moon(),
             "time_to_new_moon": moon_info.time_to_new_moon(),
@@ -84,11 +84,6 @@ def get_lunar_two_info(date, lat, lon):
         if feature.feature_type == "Landing Site":
             landing_sites[str(i)] = feature.list_from_feature()
         else:
-            features[str(i)] = list_from_feature(feature)
+            features[str(i)] = feature.list_from_feature()
 
     return {"features": features, "landing_sites": landing_sites}
-
-def list_from_feature(feature):
-    fl = [feature.name, feature.latitude, feature.longitude, feature.feature_type,
-          feature.delta_latitude, feature.delta_longitude]
-    return fl
