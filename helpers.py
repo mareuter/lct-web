@@ -79,10 +79,14 @@ def get_lunar_two_info(date, lat, lon):
     lfc.load(moon_info)
 
     features = {}
+    landing_sites = {}
     for i, feature in enumerate(lfc):
-        features[str(i)] = list_from_feature(feature)
+        if feature.feature_type == "Landing Site":
+            landing_sites[str(i)] = feature.list_from_feature()
+        else:
+            features[str(i)] = list_from_feature(feature)
 
-    return {"features": features}
+    return {"features": features, "landing_sites": landing_sites}
 
 def list_from_feature(feature):
     fl = [feature.name, feature.latitude, feature.longitude, feature.feature_type,

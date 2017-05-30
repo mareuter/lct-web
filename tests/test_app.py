@@ -74,3 +74,4 @@ class TestApp(object):
             lunar_two_info = json.loads(response.data)
             assert response.status_code == 200
             assert len(lunar_two_info["features"]) == 11
+            assert len(lunar_two_info["landing_sites"]) == 0
