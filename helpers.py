@@ -29,8 +29,6 @@ def get_moon_info(date, timezone, lat, lon):
 
     rise_set_times = {str(i): {"time": times[0], "datetime": times[1]}
                       for i, times in enumerate(moon_info.rise_set_times(timezone))}
-    # REMOVE when this is called in above function
-    moon_info.update(date_tuple)
 
     return {"age": moon_info.age(), "colong": moon_info.colong(),
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
