@@ -31,6 +31,7 @@ class TestApp(object):
             assert moon_info["fractional_phase"] == 0.9998519924481626
             assert moon_info["libration_lon"] == 5.23107551788429
             assert moon_info["libration_lat"] == -1.4788210646482465
+            assert moon_info["libration_phase_angle"] == 105.7855572234932
             assert moon_info["altitude"] == -9.8149186580585
             assert moon_info["azimuth"] == 69.75156520051686
             assert moon_info["phase"] == "Full Moon"

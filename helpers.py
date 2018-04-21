@@ -35,7 +35,8 @@ def get_moon_info(date, timezone, lat, lon):
 
     return {"age": moon_info.age(), "colong": moon_info.colong(),
             "fractional_phase": moon_info.fractional_phase(), "libration_lon": moon_info.libration_lon(),
-            "libration_lat": moon_info.libration_lat(), "altitude": moon_info.altitude(),
+            "libration_lat": moon_info.libration_lat(),
+            "libration_phase_angle": moon_info.libration_phase_angle(), "altitude": moon_info.altitude(),
             "azimuth": moon_info.azimuth(), "ra": moon_info.ra(), "dec": moon_info.dec(),
             "magnitude": moon_info.magnitude(), "earth_distance": moon_info.earth_distance(),
             "subsolar_lat": moon_info.subsolar_lat(), "angular_size": moon_info.angular_size(),
