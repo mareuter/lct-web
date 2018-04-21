@@ -5,6 +5,6 @@ gunicorn==19.7.1
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==0.23
-pylunar==0.4.1
+pylunar==0.5.1
 pytz==2017.2
 Werkzeug==0.12.2
