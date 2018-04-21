@@ -2,6 +2,7 @@ from flask import json, url_for
 
 from app import app
 
+
 class TestApp(object):
 
     def setup_class(self):

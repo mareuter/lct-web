@@ -3,11 +3,13 @@ import math
 
 from pylunar import LunarFeatureContainer, MoonInfo
 
+
 def convert_dec_loc_to_loc_tuple(loc):
     degrees = int(loc)
     minutes = math.fabs((loc - degrees)) * 60.0
     seconds = (minutes - round(minutes)) * 60.0
     return (degrees, round(minutes), round(seconds))
+
 
 def format_date_and_location(date, lat, lon):
     d = datetime.utcfromtimestamp(date)
@@ -16,12 +18,13 @@ def format_date_and_location(date, lat, lon):
     lon_tuple = convert_dec_loc_to_loc_tuple(lon)
     return date_tuple, lat_tuple, lon_tuple
 
+
 def get_moon_info(date, timezone, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
 
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
-    #print(moon_info.observer.date)
+    # print(moon_info.observer.date)
     phase_name = " ".join(moon_info.phase_name().split('_')).title()
 
     next_four_phases = {str(i): {"phase": phases[0], "datetime": phases[1]}
@@ -38,6 +41,7 @@ def get_moon_info(date, timezone, lat, lon):
             "subsolar_lat": moon_info.subsolar_lat(), "angular_size": moon_info.angular_size(),
             "elongation": moon_info.elongation(), "phase": phase_name,
             "next_four_phases": next_four_phases, "rise_set_times": rise_set_times}
+
 
 def get_lunar_club_info(date, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
@@ -66,6 +70,7 @@ def get_lunar_club_info(date, lat, lon):
             "naked_eye_features": nef,
             "binocular_features": bf,
             "telescope_features": tf}
+
 
 def get_lunar_two_info(date, lat, lon):
     date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)

@@ -12,6 +12,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 def hello():
     return "This is a web service. Nothing to see here!"
 
+
 @app.route('/moon_info')
 def moon_info():
     date = float(request.args.get('date', 0))
@@ -22,6 +23,7 @@ def moon_info():
     json_str = json.dumps(get_moon_info(date, timezone, lat, lon))
     return json_str
 
+
 @app.route('/lunar_club')
 def lunar_club():
     date = float(request.args.get('date', 0))
@@ -30,6 +32,7 @@ def lunar_club():
 
     json_str = json.dumps(get_lunar_club_info(date, lat, lon))
     return json_str
+
 
 @app.route('/lunar_two')
 def lunar_two():
