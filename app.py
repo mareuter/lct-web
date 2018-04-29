@@ -3,6 +3,7 @@ import os
 from flask import Flask, json, request
 
 from helpers import get_moon_info, get_lunar_club_info, get_lunar_two_info
+from helpers import BadCoordinatesGiven, check_for_bad_lat_lon
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -20,6 +21,9 @@ def moon_info():
     lat = float(request.args.get('lat', 0))
     lon = float(request.args.get('lon', 0))
 
+    if check_for_bad_lat_lon(lat, lon):
+        raise BadCoordinatesGiven
+
     json_str = json.dumps(get_moon_info(date, timezone, lat, lon))
     return json_str
 
@@ -29,6 +33,9 @@ def lunar_club():
     date = float(request.args.get('date', 0))
     lat = float(request.args.get('lat', 0))
     lon = float(request.args.get('lon', 0))
+
+    if check_for_bad_lat_lon(lat, lon):
+        raise BadCoordinatesGiven
 
     json_str = json.dumps(get_lunar_club_info(date, lat, lon))
     return json_str
@@ -40,8 +47,16 @@ def lunar_two():
     lat = float(request.args.get('lat', 0))
     lon = float(request.args.get('lon', 0))
 
+    if check_for_bad_lat_lon(lat, lon):
+        raise BadCoordinatesGiven
+
     json_str = json.dumps(get_lunar_two_info(date, lat, lon))
     return json_str
+
+
+@app.errorhandler(BadCoordinatesGiven)
+def handle_bad_request(e):
+    return "Bad coordinates given.", 400
 
 
 if __name__ == "__main__":

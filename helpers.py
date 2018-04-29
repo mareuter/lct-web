@@ -1,7 +1,20 @@
 from datetime import datetime
 import math
 
+from werkzeug.exceptions import BadRequest
+
 from pylunar import LunarFeatureContainer, MoonInfo
+
+
+class BadCoordinatesGiven(BadRequest):
+    pass
+
+
+def check_for_bad_lat_lon(lat, lon):
+    if lat > math.fabs(90.0) or lon > math.fabs(180.0):
+        return True
+    else:
+        return False
 
 
 def convert_dec_loc_to_loc_tuple(loc):

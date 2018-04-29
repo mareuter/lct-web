@@ -77,3 +77,11 @@ class TestApp(object):
             assert response.status_code == 200
             assert len(lunar_two_info["features"]) == 11
             assert len(lunar_two_info["landing_sites"]) == 16
+
+    def test_bad_location_errors(self):
+        with app.test_request_context():
+            moon_info_url = url_for("moon_info", date=self.date,
+                                    tz='America/New_York',
+                                    lat=180.0, lon=360.0)
+            response = self.client.get(moon_info_url)
+            assert response.status_code == 400
