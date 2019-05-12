@@ -1,4 +1,4 @@
-certifi==2017.11.5
+certifi==2019.3.9
 click==6.7
 ephem==3.7.6.0
 Flask==0.12.2
