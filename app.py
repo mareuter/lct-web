@@ -13,6 +13,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/')
+@cross_origin()
 def hello():
     return "This is a web service. Nothing to see here!"
 
@@ -33,6 +34,7 @@ def moon_info():
 
 
 @app.route('/lunar_club')
+@cross_origin()
 def lunar_club():
     date = float(request.args.get('date', 0))
     lat = float(request.args.get('lat', 0))
@@ -46,6 +48,7 @@ def lunar_club():
 
 
 @app.route('/lunar_two')
+@cross_origin()
 def lunar_two():
     date = float(request.args.get('date', 0))
     lat = float(request.args.get('lat', 0))
@@ -59,6 +62,7 @@ def lunar_two():
 
 
 @app.errorhandler(BadCoordinatesGiven)
+@cross_origin()
 def handle_bad_request(e):
     return "Bad coordinates given.", 400
 
