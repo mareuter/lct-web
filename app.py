@@ -1,20 +1,25 @@
 import os
 
 from flask import Flask, json, request
+from flask_cors import CORS, cross_origin
 
 from helpers import get_moon_info, get_lunar_club_info, get_lunar_two_info
 from helpers import BadCoordinatesGiven, check_for_bad_lat_lon
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/')
+@cross_origin()
 def hello():
     return "This is a web service. Nothing to see here!"
 
 
 @app.route('/moon_info')
+@cross_origin()
 def moon_info():
     date = float(request.args.get('date', 0))
     timezone = str(request.args.get('tz', 'UTC'))
@@ -29,6 +34,7 @@ def moon_info():
 
 
 @app.route('/lunar_club')
+@cross_origin()
 def lunar_club():
     date = float(request.args.get('date', 0))
     lat = float(request.args.get('lat', 0))
@@ -42,6 +48,7 @@ def lunar_club():
 
 
 @app.route('/lunar_two')
+@cross_origin()
 def lunar_two():
     date = float(request.args.get('date', 0))
     lat = float(request.args.get('lat', 0))
@@ -55,6 +62,7 @@ def lunar_two():
 
 
 @app.errorhandler(BadCoordinatesGiven)
+@cross_origin()
 def handle_bad_request(e):
     return "Bad coordinates given.", 400
 
