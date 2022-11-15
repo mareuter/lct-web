@@ -26,23 +26,23 @@ class TestApp(object):
             response = self.client.get(moon_info_url)
             moon_info = json.loads(response.data)
             assert response.status_code == 200
-            assert moon_info["age"] == 13.892695861570246
+            assert moon_info["age"] == 13.892695999260468
             assert moon_info["colong"] == 83.97189956624061
             assert moon_info["fractional_phase"] == 0.9998519924481626
             assert moon_info["libration_lon"] == 5.23107551788429
             assert moon_info["libration_lat"] == -1.4788210646482465
             assert moon_info["libration_phase_angle"] == 105.7855572234932
-            assert moon_info["altitude"] == -9.8149186580585
+            assert moon_info["altitude"] == -9.814919511832146
             assert moon_info["azimuth"] == 69.75156520051686
             assert moon_info["phase"] == "Full Moon"
             next_four_phases = moon_info["next_four_phases"]
             assert len(next_four_phases) == 4
             assert next_four_phases["0"]["phase"] == "full_moon"
-            assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.644067962653935]
+            assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.633078]
             assert moon_info["magnitude"] == -12.63
             assert moon_info["earth_distance"] == 386484.25078267464
-            assert moon_info["ra"] == 23.331888825304354
-            assert moon_info["dec"] == 10.129795148334347
+            assert moon_info["ra"] == 23.331890450649784
+            assert moon_info["dec"] == 10.129795616523591
             assert moon_info["angular_size"] == 0.5159071519639757
             assert moon_info["subsolar_lat"] == -0.3366501792590513
             assert moon_info["elongation"] == 178.56298828125
@@ -60,9 +60,9 @@ class TestApp(object):
             response = self.client.get(lunar_club_info_url)
             lunar_club_info = json.loads(response.data)
             assert response.status_code == 200
-            assert lunar_club_info["time_from_new_moon"] == 333.4247006776859
-            assert lunar_club_info["time_to_new_moon"] == 374.8327396878158
-            assert lunar_club_info["time_to_full_moon"] == 0.06781995449273381
+            assert lunar_club_info["time_from_new_moon"] == 333.42470398225123
+            assert lunar_club_info["time_to_new_moon"] == 374.83273694326635
+            assert lunar_club_info["time_to_full_moon"] == 0.0678198272944428
             assert lunar_club_info["fractional_phase"] == 0.9998519924481626
             assert len(lunar_club_info["naked_eye_features"]) == 10
             assert len(lunar_club_info["binocular_features"]) == 2
