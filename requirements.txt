@@ -10,5 +10,5 @@ MarkupSafe==2.1.1
 pylunar==0.6.0
 pytz==2022.6
 six==1.16.0
-Werkzeug==2.2.3
+Werkzeug==2.3.3
 zipp==3.10.0
