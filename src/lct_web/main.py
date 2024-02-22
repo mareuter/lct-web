@@ -8,17 +8,16 @@
 # Use of this source code is governed by a 3-clause BSD-style
 # license that can be found in the LICENSE file.
 
-"""Tests for API routes."""
+"""Main application definition."""
 
 from __future__ import annotations
 
-from fastapi.testclient import TestClient
-from lct_web.main import app
+from fastapi import FastAPI
 
-client = TestClient(app)
+__all__ = ["app"]
 
+app = FastAPI()
 
-def test_root() -> None:
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"msg": "This is a web service, nothing to see here."}
+@app.get("/")
+async def root() -> dict:
+    return {"msg": "This is a web service, nothing to see here."}

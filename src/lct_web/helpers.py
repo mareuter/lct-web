@@ -1,23 +1,25 @@
+# This file is part of lct-web.
+#
+# Developed by Michael Reuter.
+#
+# See the LICENSE file at the top-level directory of this distribution
+# for details of code ownership.
+#
+# Use of this source code is governed by a 3-clause BSD-style
+# license that can be found in the LICENSE file.
+
 from datetime import datetime
 import math
 
-from werkzeug.exceptions import BadRequest
-
 from pylunar import LunarFeatureContainer, MoonInfo
+from pylunar.types import DmsCoordinate
 
 
-class BadCoordinatesGiven(BadRequest):
-    pass
+def check_for_bad_lat_lon(lat: float, lon: float) -> bool:
+    return lat > math.fabs(90.0) or lon > math.fabs(180.0)
 
 
-def check_for_bad_lat_lon(lat, lon):
-    if lat > math.fabs(90.0) or lon > math.fabs(180.0):
-        return True
-    else:
-        return False
-
-
-def convert_dec_loc_to_loc_tuple(loc):
+def convert_dec_loc_to_loc_tuple(loc: float) -> DmsCoordinate:
     degrees = int(loc)
     minutes = math.fabs((loc - degrees)) * 60.0
     seconds = (minutes - round(minutes)) * 60.0
