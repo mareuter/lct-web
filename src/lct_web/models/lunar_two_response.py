@@ -8,14 +8,14 @@
 # Use of this source code is governed by a 3-clause BSD-style
 # license that can be found in the LICENSE file.
 
-"""Exceptions for package."""
-
 from __future__ import annotations
 
-__all__ = ["BadCoordinatesGiven"]
+from pydantic import BaseModel
 
+from ..pkg_types import FeatureDict
 
-class BadCoordinatesGiven(Exception):
-    """Bad coordinate given."""
+__all__ = ["LunarTwoResponse"]
 
-    pass
+class LunarTwoResponse(BaseModel):
+    features: FeatureDict
+    landing_sites: FeatureDict

@@ -8,14 +8,17 @@
 # Use of this source code is governed by a 3-clause BSD-style
 # license that can be found in the LICENSE file.
 
-"""Exceptions for package."""
+"""Model for query parameters."""
 
 from __future__ import annotations
 
-__all__ = ["BadCoordinatesGiven"]
+from pydantic import BaseModel
+
+__all__ = ["DateLoc"]
 
 
-class BadCoordinatesGiven(Exception):
-    """Bad coordinate given."""
-
-    pass
+class DateLoc(BaseModel):
+    date: float = 0
+    timezone: str = "UTC"
+    lat: float = 0
+    lon: float = 0
