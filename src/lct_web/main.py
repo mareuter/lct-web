@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
-from .models.index import IndexResponse
+from .models.index_response import IndexResponse
 from .routers import lunar_club, lunar_two, moon_info
 
 __all__ = ["app"]
