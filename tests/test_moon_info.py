@@ -17,14 +17,17 @@ from lct_web.main import app
 
 client = TestClient(app)
 
+
 def test_moon_info() -> None:
-    response = client.get("/moon_info",
-                          params = {
-                            "date": 1382133600.0,
-                            "timezone": "America/New_York",
-                            "lat": 35.9694444444444,
-                            "lon": -84.316666666666
-                          })
+    response = client.get(
+        "/moon_info",
+        params={
+            "date": 1382133600.0,
+            "timezone": "America/New_York",
+            "lat": 35.9694444444444,
+            "lon": -84.316666666666,
+        },
+    )
     assert response.status_code == 200
     moon_info = response.json()
     assert moon_info["age"] == 13.892695999260468

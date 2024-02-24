@@ -17,13 +17,11 @@ from lct_web.main import app
 
 client = TestClient(app)
 
+
 def test_lunar_club() -> None:
-    response = client.get("/lunar_club",
-                          params = {
-                            "date": 1382133600.0,
-                            "lat": 35.9694444444444,
-                            "lon": -84.316666666666
-                          })
+    response = client.get(
+        "/lunar_club", params={"date": 1382133600.0, "lat": 35.9694444444444, "lon": -84.316666666666}
+    )
     assert response.status_code == 200
     lunar_club_info = response.json()
     assert lunar_club_info["time_from_new_moon"] == 333.42470398225123

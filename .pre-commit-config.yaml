@@ -27,3 +27,4 @@ repos:
         additional_dependencies:
           - "pydantic"
           - "fastapi"
+          - "types-pytz"

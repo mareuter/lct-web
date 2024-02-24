@@ -20,12 +20,9 @@ from .models.dateloc import DateLoc
 
 __all__ = ["DateLocDeps"]
 
+
 def dateloc_parameters(date: float = 0, timezone: str = "UTC", lat: float = 0, lon: float = 0) -> DateLoc:
-    return DateLoc(
-        date=date,
-        timezone=timezone,
-        lat=lat,
-        lon=lon
-    )
+    return DateLoc(date=date, timezone=timezone, lat=lat, lon=lon)
+
 
 DateLocDeps = Annotated[DateLoc, Depends(dateloc_parameters)]

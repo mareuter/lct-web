@@ -12,13 +12,32 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+from math import fabs
+
+from fastapi import Query
+from pydantic import BaseModel, field_validator
+import pytz
+from pytz.exceptions import UnknownTimeZoneError
 
 __all__ = ["DateLoc"]
 
 
 class DateLoc(BaseModel):
-    date: float = 0
-    timezone: str = "UTC"
-    lat: float = 0
-    lon: float = 0
+    """Model for route query parameters."""
+
+    date: float = Query(0, title="Date", description="A UNIX timestamp holding the requested date.")
+    timezone: str = Query("UTC", title="Timezone", description="The timezone for the given location.")
+    lat: float = Query(0, title="Latitude", description="The latitude for the given location.", le=fabs(90.0))
+    lon: float = Query(
+        0, title="Longitude", description="The longitude for the given location.", le=fabs(180.0)
+    )
+
+    @field_validator("timezone")
+    @classmethod
+    def check_timezone(cls, tz: str) -> str:
+        """Check for timezone name."""
+        try:
+            pytz.timezone(tz)
+        except UnknownTimeZoneError:
+            raise ValueError(f"Unknown timezone {tz}") from None
+        return tz

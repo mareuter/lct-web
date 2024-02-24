@@ -8,6 +8,8 @@
 # Use of this source code is governed by a 3-clause BSD-style
 # license that can be found in the LICENSE file.
 
+"""Model for moon_info route."""
+
 from __future__ import annotations
 
 from pydantic import BaseModel
@@ -16,7 +18,10 @@ from ..pkg_types import NextFourPhases, RiseSetTimes
 
 __all__ = ["MoonInfoResponse"]
 
+
 class MoonInfoResponse(BaseModel):
+    """Response model for the moon_info route."""
+
     age: float
     colong: float
     fractional_phase: float

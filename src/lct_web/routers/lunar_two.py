@@ -23,6 +23,7 @@ __all__ = ["router"]
 
 router = APIRouter()
 
+
 @router.get("/lunar_two")
 def lunar_two(params: DateLocDeps) -> LunarTwoResponse:
     date = params.date

@@ -18,4 +18,6 @@ __all__ = ["IndexResponse"]
 
 
 class IndexResponse(BaseModel):
+    """Response model for the main route."""
+
     msg: str

@@ -21,6 +21,7 @@ __all__ = ["router"]
 
 router = APIRouter()
 
+
 @router.get("/moon_info")
 def moon_info(params: DateLocDeps) -> MoonInfoResponse:
     date = params.date
@@ -33,20 +34,35 @@ def moon_info(params: DateLocDeps) -> MoonInfoResponse:
     moon_info = MoonInfo(lat_tuple, lon_tuple)
     moon_info.update(date_tuple)
     # print(moon_info.observer.date)
-    phase_name = " ".join(moon_info.phase_name().split('_')).title()
+    phase_name = " ".join(moon_info.phase_name().split("_")).title()
 
-    next_four_phases = {str(i): {"phase": phases[0], "datetime": phases[1]}
-                        for i, phases in enumerate(moon_info.next_four_phases())}
+    next_four_phases = {
+        str(i): {"phase": phases[0], "datetime": phases[1]}
+        for i, phases in enumerate(moon_info.next_four_phases())
+    }
 
-    rise_set_times = {str(i): {"time": times[0], "datetime": times[1]}
-                      for i, times in enumerate(moon_info.rise_set_times(timezone))}
+    rise_set_times = {
+        str(i): {"time": times[0], "datetime": times[1]}
+        for i, times in enumerate(moon_info.rise_set_times(timezone))
+    }
 
-    return MoonInfoResponse(age=moon_info.age(), colong=moon_info.colong(),
-            fractional_phase=moon_info.fractional_phase(), libration_lon=moon_info.libration_lon(),
-            libration_lat=moon_info.libration_lat(),
-            libration_phase_angle=moon_info.libration_phase_angle(), altitude=moon_info.altitude(),
-            azimuth=moon_info.azimuth(), ra=moon_info.ra(), dec=moon_info.dec(),
-            magnitude=moon_info.magnitude(), earth_distance=moon_info.earth_distance(),
-            subsolar_lat=moon_info.subsolar_lat(), angular_size=moon_info.angular_size(),
-            elongation=moon_info.elongation(), phase=phase_name,
-            next_four_phases=next_four_phases, rise_set_times=rise_set_times)
+    return MoonInfoResponse(
+        age=moon_info.age(),
+        colong=moon_info.colong(),
+        fractional_phase=moon_info.fractional_phase(),
+        libration_lon=moon_info.libration_lon(),
+        libration_lat=moon_info.libration_lat(),
+        libration_phase_angle=moon_info.libration_phase_angle(),
+        altitude=moon_info.altitude(),
+        azimuth=moon_info.azimuth(),
+        ra=moon_info.ra(),
+        dec=moon_info.dec(),
+        magnitude=moon_info.magnitude(),
+        earth_distance=moon_info.earth_distance(),
+        subsolar_lat=moon_info.subsolar_lat(),
+        angular_size=moon_info.angular_size(),
+        elongation=moon_info.elongation(),
+        phase=phase_name,
+        next_four_phases=next_four_phases,
+        rise_set_times=rise_set_times,
+    )

@@ -17,13 +17,11 @@ from lct_web.main import app
 
 client = TestClient(app)
 
+
 def test_lunar_two() -> None:
-    response = client.get("/lunar_two",
-                          params = {
-                            "date": 1382133600.0,
-                            "lat": 35.9694444444444,
-                            "lon": -84.316666666666
-                          })
+    response = client.get(
+        "/lunar_two", params={"date": 1382133600.0, "lat": 35.9694444444444, "lon": -84.316666666666}
+    )
     assert response.status_code == 200
     lunar_two_info = response.json()
     assert len(lunar_two_info["features"]) == 11
