@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-from pylunar.types import DateTimeTuple, LunarFeatureList
+from pylunar.pkg_types import DateTimeTuple, LunarFeatureList
 
 __all__ = ["NextFourPhases", "RiseSetTimes"]
 

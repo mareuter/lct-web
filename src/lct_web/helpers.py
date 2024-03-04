@@ -15,7 +15,7 @@ from __future__ import annotations
 from datetime import datetime
 import math
 
-from pylunar.types import DateTimeTuple, DmsCoordinate
+from pylunar.pkg_types import DateTimeTuple, DmsCoordinate
 
 __all__ = ["check_for_bad_lat_lon", "convert_dec_loc_to_loc_tuple", "format_date_and_location"]
 
