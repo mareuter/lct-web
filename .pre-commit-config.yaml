@@ -25,6 +25,6 @@ repos:
       - id: mypy
         args: [--strict]
         additional_dependencies:
-          - "pydantic"
-          - "fastapi"
-          - "types-pytz"
+          - "pydantic==2.6.3"
+          - "fastapi==0.110.0"
+          - "types-pytz==2024.1.0.20240203"
