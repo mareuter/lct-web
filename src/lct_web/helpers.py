@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, UTC
 import math
 
 from pylunar.pkg_types import DateTimeTuple, DmsCoordinate
@@ -76,7 +76,7 @@ def format_date_and_location(
     tuple[DateTimeTuple, DmsCoordinate, DmsCoordinate]
         The formatted quantities.
     """
-    d = datetime.utcfromtimestamp(date)
+    d = datetime.fromtimestamp(date, UTC)
     date_tuple = (d.year, d.month, d.day, d.hour, d.minute, d.second)
     lat_tuple = convert_dec_loc_to_loc_tuple(lat)
     lon_tuple = convert_dec_loc_to_loc_tuple(lon)
