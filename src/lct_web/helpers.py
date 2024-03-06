@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 import math
 
 from pylunar.pkg_types import DateTimeTuple, DmsCoordinate
