@@ -13,11 +13,10 @@
 from __future__ import annotations
 
 from math import fabs
+import zoneinfo
 
 from fastapi import Query
 from pydantic import BaseModel, field_validator
-import pytz
-from pytz.exceptions import UnknownTimeZoneError
 
 __all__ = ["DateLoc"]
 
@@ -37,7 +36,7 @@ class DateLoc(BaseModel):
     def check_timezone(cls, tz: str) -> str:
         """Check for timezone name."""
         try:
-            pytz.timezone(tz)
-        except UnknownTimeZoneError:
+            zoneinfo.ZoneInfo(tz)
+        except zoneinfo.ZoneInfoNotFoundError:
             raise ValueError(f"Unknown timezone {tz}") from None
         return tz
