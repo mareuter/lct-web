@@ -7,3 +7,17 @@
 #
 # Use of this source code is governed by a 3-clause BSD-style
 # license that can be found in the LICENSE file.
+
+"""Model for main route."""
+
+from __future__ import annotations
+
+from pydantic import BaseModel
+
+__all__ = ["IndexResponse"]
+
+
+class IndexResponse(BaseModel):
+    """Response model for the main route."""
+
+    msg: str

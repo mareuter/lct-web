@@ -1,87 +1,50 @@
-from flask import json, url_for
+# This file is part of lct-web.
+#
+# Developed by Michael Reuter.
+#
+# See the LICENSE file at the top-level directory of this distribution
+# for details of code ownership.
+#
+# Use of this source code is governed by a 3-clause BSD-style
+# license that can be found in the LICENSE file.
 
-from app import app
+"""Tests for API routes."""
+
+from __future__ import annotations
+
+import os
+
+from fastapi.testclient import TestClient
+from lct_web.main import app
+from pydantic import ValidationError
+import pytest
+
+client = TestClient(app)
 
 
-class TestApp(object):
+def test_root() -> None:
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"msg": "This is a web service, nothing to see here."}
 
-    def setup_class(self):
-        self.client = app.test_client()
-        self.client.testing = True
-        self.date = 1382133600.0
-        self.latitude = 35.9694444444444
-        self.longitude = -84.316666666666
 
-    def test_basic_content(self):
-        response = self.client.get('/')
-        assert response.data == b'This is a web service. Nothing to see here!'
-        assert response.status_code == 200
-
-    def test_moon_info(self):
-        with app.test_request_context():
-            moon_info_url = url_for("moon_info", date=self.date,
-                                    tz='America/New_York',
-                                    lat=self.latitude,
-                                    lon=self.longitude)
-            response = self.client.get(moon_info_url)
-            moon_info = json.loads(response.data)
-            assert response.status_code == 200
-            assert moon_info["age"] == 13.892695999260468
-            assert moon_info["colong"] == 83.97189956624061
-            assert moon_info["fractional_phase"] == 0.9998519924481626
-            assert moon_info["libration_lon"] == 5.23107551788429
-            assert moon_info["libration_lat"] == -1.4788210646482465
-            assert moon_info["libration_phase_angle"] == 105.7855572234932
-            assert moon_info["altitude"] == -9.814919511832146
-            assert moon_info["azimuth"] == 69.75156520051686
-            assert moon_info["phase"] == "Full Moon"
-            next_four_phases = moon_info["next_four_phases"]
-            assert len(next_four_phases) == 4
-            assert next_four_phases["0"]["phase"] == "full_moon"
-            assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.633078]
-            assert moon_info["magnitude"] == -12.63
-            assert moon_info["earth_distance"] == 386484.25078267464
-            assert moon_info["ra"] == 23.331890450649784
-            assert moon_info["dec"] == 10.129795616523591
-            assert moon_info["angular_size"] == 0.5159071519639757
-            assert moon_info["subsolar_lat"] == -0.3366501792590513
-            assert moon_info["elongation"] == 178.56298828125
-            assert moon_info["rise_set_times"]["0"]["time"] == "transit"
-            assert moon_info["rise_set_times"]["0"]["datetime"] == [2013, 10, 18, 0, 43, 21]
-            assert moon_info["rise_set_times"]["1"]["time"] == "set"
-            assert moon_info["rise_set_times"]["1"]["datetime"] == [2013, 10, 18, 7, 22, 18]
-            assert moon_info["rise_set_times"]["2"]["time"] == "rise"
-            assert moon_info["rise_set_times"]["2"]["datetime"] == [2013, 10, 18, 18, 47, 40]
-
-    def test_lunar_club_info(self):
-        with app.test_request_context():
-            lunar_club_info_url = url_for("lunar_club", date=self.date, lat=self.latitude,
-                                          lon=self.longitude)
-            response = self.client.get(lunar_club_info_url)
-            lunar_club_info = json.loads(response.data)
-            assert response.status_code == 200
-            assert lunar_club_info["time_from_new_moon"] == 333.42470398225123
-            assert lunar_club_info["time_to_new_moon"] == 374.83273694326635
-            assert lunar_club_info["time_to_full_moon"] == 0.0678198272944428
-            assert lunar_club_info["fractional_phase"] == 0.9998519924481626
-            assert len(lunar_club_info["naked_eye_features"]) == 10
-            assert len(lunar_club_info["binocular_features"]) == 2
-            assert len(lunar_club_info["telescope_features"]) == 0
-
-    def test_lunar_two_info(self):
-        with app.test_request_context():
-            lunar_two_info_url = url_for("lunar_two", date=self.date, lat=self.latitude,
-                                         lon=self.longitude)
-            response = self.client.get(lunar_two_info_url)
-            lunar_two_info = json.loads(response.data)
-            assert response.status_code == 200
-            assert len(lunar_two_info["features"]) == 11
-            assert len(lunar_two_info["landing_sites"]) == 16
-
-    def test_bad_location_errors(self):
-        with app.test_request_context():
-            moon_info_url = url_for("moon_info", date=self.date,
-                                    tz='America/New_York',
-                                    lat=180.0, lon=360.0)
-            response = self.client.get(moon_info_url)
-            assert response.status_code == 400
+def test_bad_location() -> None:
+    with pytest.raises(ValidationError) as err:
+        client.get(
+            "/moon_info",
+            params={
+                "lat": 96.5,
+                "lon": 184.342,
+                "date": 1677880560.0,
+                "timezone": "Madeup/Honalee",
+            },
+        )
+    lines = str(err).split(os.linesep)
+    assert "3 validation errors for DateLoc" in lines[0]
+    for i, line in enumerate(lines):
+        if line.startswith("lat"):
+            assert "Input should be less than or equal to 90" in lines[i + 1]
+        if line.startswith("lon"):
+            assert "Input should be less than or equal to 180" in lines[i + 1]
+        if line.startswith("timezone"):
+            assert "Unknown timezone" in lines[i + 1]
