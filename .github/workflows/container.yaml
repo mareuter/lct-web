@@ -14,6 +14,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Build package with deps
+        run: |
+          python -m pip install --upgrade pip
+          pip wheel --wheel-dir wheel --editable .
 
       - name: Docker meta
         id: meta
@@ -64,7 +76,7 @@ jobs:
     needs: docker
     steps:
       - name: Deploy to Render
-        uses: johnbeynon/render-webhook-action
+        uses: johnbeynon/render-webhook-action@v0.0.6
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           key: ${{ secrets.RENDER_SERVICE_KEY }}
