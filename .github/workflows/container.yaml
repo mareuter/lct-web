@@ -25,8 +25,7 @@ jobs:
       - name: Build package with deps
         run: |
           python -m pip install --upgrade pip
-          pip wheel --wheel-dir wheel --editable .
-          ls
+          pip wheel --wheel-dir wheels --editable .
 
       - name: Docker meta
         id: meta
