@@ -17,16 +17,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Build package with deps
-        run: |
-          python -m pip install --upgrade pip
-          pip wheel --wheel-dir wheels --editable .
-
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
