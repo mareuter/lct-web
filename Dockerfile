@@ -7,11 +7,9 @@ WORKDIR /app
 RUN  apt update && \
      apt-get install --yes git
 
-COPY pyproject.toml .
-COPY .git .git
-COPY src src
+COPY . .
 
-RUN pip wheel --wheel-dir wheels -e .
+RUN git diff && pip wheel --wheel-dir wheels -e .
 
 FROM python:3.12-slim
 
@@ -26,7 +24,7 @@ WORKDIR /home/fastapi
 
 ENV PATH="/home/fastapi/.local/bin:${PATH}"
 
-RUN --mount=type=bind,from=builder,source=/app/wheels,target=wheels,type=bind \
+RUN --mount=type=bind,from=builder,source=/app/wheels,target=wheels \
     pip install --no-cache-dir --user wheels/*
 
 EXPOSE 8000
