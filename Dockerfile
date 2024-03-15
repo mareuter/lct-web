@@ -1,3 +1,18 @@
+FROM python:3.12-slim as builder
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+RUN  apt update && \
+     apt-get install --yes git
+
+COPY pyproject.toml .
+COPY .git .git
+COPY src src
+
+RUN pip wheel --wheel-dir wheels -e .
+
 FROM python:3.12-slim
 
 LABEL maintainer="Michael Reuter"
@@ -11,7 +26,7 @@ WORKDIR /home/fastapi
 
 ENV PATH="/home/fastapi/.local/bin:${PATH}"
 
-RUN --mount=source=wheels,target=wheels,type=bind \
+RUN --mount=type=bind,from=builder,source=/app/wheels,target=wheels,type=bind \
     pip install --no-cache-dir --user wheels/*
 
 EXPOSE 8000
