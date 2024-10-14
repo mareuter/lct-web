@@ -15,9 +15,10 @@ from __future__ import annotations
 import os
 
 from fastapi.testclient import TestClient
-from lct_web.main import app
 from pydantic import ValidationError
 import pytest
+
+from lct_web.main import app
 
 client = TestClient(app)
 
