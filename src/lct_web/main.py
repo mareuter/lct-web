@@ -15,6 +15,7 @@ from __future__ import annotations
 from typing import Any
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 
 from . import __version__
@@ -24,6 +25,12 @@ from .routers import lunar_club, lunar_two, moon_info
 __all__ = ["app"]
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_methods=["GET"],
+    allow_headers=["Content-Type"],
+)
 
 app.include_router(moon_info.router)
 app.include_router(lunar_club.router)
