@@ -27,3 +27,4 @@ def test_lunar_two() -> None:
     lunar_two_info = response.json()
     assert len(lunar_two_info["features"]) == 11
     assert len(lunar_two_info["landing_sites"]) == 16
+    assert len(lunar_two_info["altitudes"]) == 4

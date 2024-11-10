@@ -13,7 +13,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter
-from pylunar import LunarFeatureContainer, MoonInfo
+from pylunar import AltitudeDict, LunarFeatureContainer, MoonInfo
 
 from ..dependencies import DateLocDeps
 from ..helpers import format_date_and_location
@@ -38,6 +38,9 @@ def lunar_two(params: DateLocDeps) -> LunarTwoResponse:
     lfc = LunarFeatureContainer("LunarII")
     lfc.load(moon_info)
 
+    ad = AltitudeDict()
+    ad.load(moon_info)
+
     features = {}
     landing_sites = {}
     for i, feature in enumerate(lfc):
@@ -46,4 +49,4 @@ def lunar_two(params: DateLocDeps) -> LunarTwoResponse:
         else:
             features[str(i)] = feature.list_from_feature()
 
-    return LunarTwoResponse(features=features, landing_sites=landing_sites)
+    return LunarTwoResponse(features=features, landing_sites=landing_sites, altitudes=ad)

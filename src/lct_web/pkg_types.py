@@ -14,8 +14,9 @@ from __future__ import annotations
 
 from pylunar.pkg_types import DateTimeTuple, LunarFeatureList
 
-__all__ = ["NextFourPhases", "RiseSetTimes"]
+__all__ = ["AltitudeDict", "FeatureDict", "NextFourPhases", "RiseSetTimes"]
 
+AltitudeDict = dict[str, float]
 FeatureDict = dict[str, LunarFeatureList]
 NextFourPhases = dict[str, dict[str, str | DateTimeTuple]]
 RiseSetTimes = dict[str, dict[str, str | DateTimeTuple]]
