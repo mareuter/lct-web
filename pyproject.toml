@@ -14,10 +14,10 @@ authors = [
 ]
 description = "Web service for Lunar Club and Lunar Club II information."
 readme = "README.rst"
+license = "BSD-3-Clause"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
