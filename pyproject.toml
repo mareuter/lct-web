@@ -28,7 +28,6 @@ dependencies = [
     "fastapi==0.115.2",
     "uvicorn[standard]==0.31.1",
     "pylunar==0.8.0",
-    "tzdata==2024.2"
 ]
 
 [project.urls]
