@@ -27,7 +27,7 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi==0.115.12",
     "uvicorn[standard]==0.34.2",
-    "pylunar==0.8.0",
+    "pylunar==0.10.0",
 ]
 
 [project.urls]
