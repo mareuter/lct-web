@@ -14,10 +14,10 @@ authors = [
 ]
 description = "Web service for Lunar Club and Lunar Club II information."
 readme = "README.rst"
+license = "BSD-3-Clause"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
@@ -25,10 +25,9 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.115.2",
-    "uvicorn[standard]==0.31.1",
-    "pylunar==0.8.0",
-    "tzdata==2024.2"
+    "fastapi==0.115.12",
+    "uvicorn[standard]==0.34.2",
+    "pylunar==0.10.0",
 ]
 
 [project.urls]
@@ -37,15 +36,15 @@ Repository = "https://github.com/mareuter/lct-web"
 [project.optional-dependencies]
 dev = [
     "lct-web[lint,test]",
-    "tox==4.21.2"
+    "tox==4.25.0"
 ]
 test = [
-    "coverage[toml]==7.6.3",
-    "httpx==0.27.2",
-    "pytest==8.3.3"
+    "coverage[toml]==7.8.0",
+    "httpx==0.28.1",
+    "pytest==8.3.5"
 ]
 lint = [
-    "pre-commit==4.0.1"
+    "pre-commit==4.2.0"
 ]
 
 [tool.setuptools_scm]

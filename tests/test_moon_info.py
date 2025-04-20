@@ -44,7 +44,7 @@ def test_moon_info() -> None:
     assert len(next_four_phases) == 4
     assert next_four_phases["0"]["phase"] == "full_moon"
     assert next_four_phases["0"]["datetime"] == [2013, 10, 18, 23, 37, 39.633078]
-    assert moon_info["magnitude"] == -12.63
+    assert moon_info["magnitude"] == -12.68
     assert moon_info["earth_distance"] == 386484.25078267464
     assert moon_info["ra"] == 23.331890450649784
     assert moon_info["dec"] == 10.129795616523591
