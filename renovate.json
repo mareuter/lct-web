@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":rebaseStalePrs"
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": ["python"],
+      "enabled": false
+    }
+  ],
+  "timezone": "America/Phoenix",
+  "schedule": ["* * 15,27 * *"]
+}
