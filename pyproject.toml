@@ -25,7 +25,7 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.115.14",
+    "fastapi==0.116.1",
     "uvicorn[standard]==0.34.3",
     "pylunar==0.10.0",
 ]
