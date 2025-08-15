@@ -36,7 +36,7 @@ Repository = "https://github.com/mareuter/lct-web"
 [project.optional-dependencies]
 dev = [
     "lct-web[lint,test]",
-    "tox==4.28.3"
+    "tox==4.28.4"
 ]
 test = [
     "coverage[toml]==7.10.3",
