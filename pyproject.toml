@@ -25,26 +25,28 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.141.1",
-    "uvicorn[standard]==0.52.4",
-    "pylunar==0.11.1",
+    "fastapi",
+    "uvicorn[standard]",
+    "pylunar",
 ]
 
 [project.urls]
 Repository = "https://github.com/mareuter/lct-web"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "lct-web[lint,test]",
-    "tox==4.60.1"
+    "tox",
+    "tox-uv>=1.29.0",
+    { include-group = "lint" },
+    { include-group = "test" }
 ]
 test = [
-    "coverage[toml]==7.15.4",
-    "httpx==0.28.1",
-    "pytest==9.1.1"
+    "coverage[toml]",
+    "httpx",
+    "pytest"
 ]
 lint = [
-    "pre-commit==4.6.2"
+    "pre-commit"
 ]
 
 [tool.setuptools_scm]
