@@ -7,42 +7,52 @@ on:
       - "main"
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
+  ci:
     strategy:
       matrix:
         python:
           - "3.11"
           - "3.12"
+    uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@main
+    with:
+      target: ${{ matrix.python }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+  # lint:
+  #   runs-on: ubuntu-latest
 
-      - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
-        with:
-          python-version: ${{ matrix.python }}
+  #   strategy:
+  #     matrix:
+  #       python:
+  #         - "3.11"
+  #         - "3.12"
 
-      - name: Run linters
-        run: uv run --only-group=tox tox run -e lint
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-  test:
-    runs-on: ubuntu-latest
+  #     - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
+  #       with:
+  #         python-version: ${{ matrix.python }}
 
-    strategy:
-      matrix:
-        python:
-          - "3.11"
-          - "3.12"
+  #     - name: Run linters
+  #       run: uv run --only-group=tox tox run -e lint
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+  # test:
+  #   runs-on: ubuntu-latest
 
-      - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
-        with:
-          python-version: ${{ matrix.python }}
+  #   strategy:
+  #     matrix:
+  #       python:
+  #         - "3.11"
+  #         - "3.12"
 
-      - name: Run tests
-        run: uv run --only-group=tox tox run -e py,coverage-report
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+  #     - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
+  #       with:
+  #         python-version: ${{ matrix.python }}
+
+  #     - name: Run tests
+  #       run: uv run --only-group=tox tox run -e py,coverage-report
