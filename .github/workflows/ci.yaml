@@ -15,7 +15,7 @@ jobs:
           - "3.12"
     uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@main
     with:
-      target: ${{ matrix.python }}
+      python-version: ${{ matrix.python }}
 
   # lint:
   #   runs-on: ubuntu-latest
