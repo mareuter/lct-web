@@ -41,7 +41,7 @@ dev = [
 ]
 tox = [
     "tox",
-    "tox-uv>=1.29.0",
+    "tox-uv-bare>=1.36.0",
 ]
 test = [
     "coverage[toml]",
