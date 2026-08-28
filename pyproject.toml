@@ -42,8 +42,8 @@ dev = [
 ]
 test = [
     "coverage[toml]",
-    "httpx",
-    "pytest"
+    "httpx2",
+    "pytest",
 ]
 lint = [
     "pre-commit"
