@@ -1,7 +1,10 @@
-FROM python:3.12-slim as builder
+FROM python:3.12-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install uv.
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 RUN  apt update && \
@@ -9,7 +12,8 @@ RUN  apt update && \
 
 COPY . .
 
-RUN git diff && pip wheel --wheel-dir wheels -e .
+RUN uv sync --frozen --no-cache
+RUN git diff && uv build --wheel -o wheels
 
 FROM python:3.12-slim
 

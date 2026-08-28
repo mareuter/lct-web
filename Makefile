@@ -1,9 +1,19 @@
 .PHONY: help
 help:
+	@echo "docker-build - build Docker image"
+	@echo "docker-run - run Docker image"
 	@echo "init - initialize a clean clone"
 	@echo "update-deps - update dependencies"
 	@echo "update-precommit - update pre-commit config"
 	@echo "update - update dependencies and pre-commit config"
+
+.PHONY: docker-build
+docker-build:
+	docker build . --rm -t lct-web:latest
+
+.PHONY: docker-run
+docker-run:
+	docker run --rm --name lct-web -p 8000:8000 lct-web:latest
 
 .PHONY: init
 init:
