@@ -7,40 +7,12 @@ on:
       - "main"
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
+  ci:
     strategy:
       matrix:
         python:
           - "3.11"
           - "3.12"
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-
-      - name: Run tox
-        uses: lsst-sqre/run-tox@e6a58bead3e6e08ec59381fc12c2287a0a8733fb # v1
-        with:
-          python-version: ${{ matrix.python }}
-          tox-envs: "lint"
-
-  test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python:
-          - "3.11"
-          - "3.12"
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-
-      - name: Run tox
-        uses: lsst-sqre/run-tox@e6a58bead3e6e08ec59381fc12c2287a0a8733fb # v1
-        with:
-          python-version: ${{ matrix.python }}
-          tox-envs: "py,coverage-report"
+    uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@main
+    with:
+      python-version: ${{ matrix.python }}
