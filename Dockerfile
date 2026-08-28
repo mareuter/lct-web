@@ -1,4 +1,4 @@
-FROM python:3.12-slim AS builder
+FROM python:3.12-slim@sha256:09f7da3bc104798d0afb40bc08d23ab2da20a76130cec1f2ef170848f5d85217 AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -15,7 +15,7 @@ COPY . .
 RUN uv sync --frozen --no-cache
 RUN git diff && uv build --wheel -o wheels
 
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:09f7da3bc104798d0afb40bc08d23ab2da20a76130cec1f2ef170848f5d85217
 
 LABEL maintainer="Michael Reuter"
 LABEL org.opencontainers.image.source=https://github.com/mareuter/lct-web
