@@ -18,7 +18,7 @@ docker-run:
 .PHONY: init
 init:
 	uv sync --frozen --all-groups
-	uv run pre-commit install
+	uv run prek install
 
 .PHONY: update-deps
 update-deps: update-precommit
@@ -26,7 +26,7 @@ update-deps: update-precommit
 
 .PHONY: update-precommit
 update-precommit:
-	uv run --only-group=lint pre-commit autoupdate
+	uv run --only-group=lint prek autoupdate
 
 .PHONY: update
 update: update-deps init
