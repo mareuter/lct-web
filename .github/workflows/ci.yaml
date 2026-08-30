@@ -11,8 +11,8 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.11"
-          - "3.12"
+          - "3.13"
+          - "3.14"
     uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@6842eb7a58bbb8ac3a3620df50eb0c1973a72a51 # main
     with:
       python-version: ${{ matrix.python }}
