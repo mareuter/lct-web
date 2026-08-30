@@ -20,6 +20,8 @@ __all__ = ["LunarClub", "LunarTwo"]
 class LunarClub(BaseModel):
     """Model for Lunar Club summary information."""
 
+    time_events: bool
+    phase_events: bool
     naked_eye: int
     binocular: int
     telescope: int
