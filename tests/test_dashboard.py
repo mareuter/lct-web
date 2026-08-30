@@ -38,3 +38,9 @@ def test_dashboard() -> None:
     assert next_phase[0]["id"] == 0
     assert next_phase[0]["phase"] == "full_moon"
     assert next_phase[0]["datetime"] == [2013, 10, 18, 23, 37, 39.633078]
+    assert dashboard_info["lunar_club"]["naked_eye"] == 10
+    assert dashboard_info["lunar_club"]["binocular"] == 2
+    assert dashboard_info["lunar_club"]["telescope"] == 0
+    assert dashboard_info["lunar_two"]["features"] == 11
+    assert dashboard_info["lunar_two"]["landing_sites"] == 16
+    assert dashboard_info["lunar_two"]["altitudes"] == 0
