@@ -15,6 +15,7 @@ from __future__ import annotations
 from pydantic import BaseModel
 
 from .phase_info import PhaseInfo
+from .summaries import LunarClub, LunarTwo
 
 __all__ = ["DashboardResponse"]
 
@@ -29,3 +30,5 @@ class DashboardResponse(BaseModel):
     fractional_phase: float
     phase: str
     next_phase: list[PhaseInfo]
+    lunar_club: LunarClub
+    lunar_two: LunarTwo
