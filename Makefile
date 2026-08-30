@@ -1,11 +1,18 @@
 .PHONY: help
 help:
+	@echo "clean - clean up build products"
 	@echo "docker-build - build Docker image"
 	@echo "docker-run - run Docker image"
 	@echo "init - initialize a clean clone"
 	@echo "update-deps - update dependencies"
 	@echo "update-precommit - update pre-commit config"
 	@echo "update - update dependencies and pre-commit config"
+
+.PHONY: clean
+clean:
+	rm -rf build
+	rm -rf dist
+	rm -rf wheels
 
 .PHONY: docker-build
 docker-build:
