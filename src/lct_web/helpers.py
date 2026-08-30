@@ -15,9 +15,17 @@ from __future__ import annotations
 from datetime import UTC, datetime
 import math
 
+from pylunar import MoonInfo
 from pylunar.pkg_types import DateTimeTuple, DmsCoordinate
 
-__all__ = ["check_for_bad_lat_lon", "convert_dec_loc_to_loc_tuple", "format_date_and_location"]
+from .dependencies import DateLocDeps
+
+__all__ = [
+    "check_for_bad_lat_lon",
+    "convert_dec_loc_to_loc_tuple",
+    "create_moon_info",
+    "format_date_and_location",
+]
 
 
 def check_for_bad_lat_lon(lat: float, lon: float) -> bool:
@@ -55,6 +63,30 @@ def convert_dec_loc_to_loc_tuple(loc: float) -> DmsCoordinate:
     minutes = math.fabs(loc - degrees) * 60.0
     seconds = (minutes - round(minutes)) * 60.0
     return (degrees, round(minutes), round(seconds))
+
+
+def create_moon_info(params: DateLocDeps) -> MoonInfo:
+    """Create a MoonInfo object from the passed parameters.
+
+    Parameters
+    ----------
+    params : DateLocDeps
+        Date and location data to use.
+
+    Returns
+    -------
+    MoonInfo
+        The moon info object based on the passed data.
+    """
+    date = params.date
+    lat = params.lat
+    lon = params.lon
+
+    date_tuple, lat_tuple, lon_tuple = format_date_and_location(date, lat, lon)
+
+    moon_info = MoonInfo(lat_tuple, lon_tuple)
+    moon_info.update(date_tuple)
+    return moon_info
 
 
 def format_date_and_location(
