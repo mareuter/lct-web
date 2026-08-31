@@ -11,9 +11,9 @@
 """Routing definition for dashboard."""
 
 from fastapi import APIRouter
-from pylunar import LunarFeatureContainer
+from pylunar import AltitudeDict, LunarFeatureContainer
 
-from ..club_logic import check_full_moon_events, check_new_moon_events
+from ..club_logic import check_altitude_events, check_full_moon_events, check_new_moon_events
 from ..dependencies import DateLocDeps
 from ..helpers import create_moon_info
 from ..models.dashboard_response import DashboardResponse
@@ -59,6 +59,10 @@ def dashboard(params: DateLocDeps) -> DashboardResponse:
         else:
             l2_feat += 1
 
+    ad = AltitudeDict()
+    ad.load(moon_info)
+    alt_events = check_altitude_events(ad)
+
     return DashboardResponse(
         age=moon_info.age(),
         altitude=moon_info.altitude(),
@@ -74,5 +78,5 @@ def dashboard(params: DateLocDeps) -> DashboardResponse:
             binocular=lc_bino,
             telescope=lc_tel,
         ),
-        lunar_two=LunarTwo(features=l2_feat, landing_sites=l2_ls, altitudes=0),
+        lunar_two=LunarTwo(features=l2_feat, landing_sites=l2_ls, altitude_events=alt_events.isActive()),
     )
