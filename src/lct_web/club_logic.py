@@ -12,9 +12,73 @@
 
 from __future__ import annotations
 
+from enum import Enum
+
+from pylunar import AltitudeDict
+
+from .models.altitude_events import AltitudeEvents
 from .models.special_events import PhaseEvents, TimeEvents
 
-__all__ = ["check_full_moon_events", "check_new_moon_events"]
+__all__ = ["check_altitude_events", "check_full_moon_events", "check_new_moon_events"]
+
+
+def check_altitude_events(alt_dict: AltitudeDict) -> AltitudeEvents:
+    """Determine if any of the altitude events from Lunar II are active.
+
+    Parameters
+    ----------
+    alt_dict : AltitudeDict
+        Altitude information from the needed features.
+
+    Returns
+    -------
+    AltitudeEvents
+        The altitude events information.
+    """
+    event_window = 5.0  # degrees
+    sunrise_angle = 0.0  # degrees
+    midday_angle = 90.0  # degrees
+    sunset_angle = 180.0  # degrees
+
+    class EventType(Enum):
+        SUNRISE = 1
+        MIDDAY = 2
+        SUNSET = 3
+
+    events = {
+        "Byrgius A": [EventType.SUNRISE, EventType.MIDDAY, EventType.SUNSET],
+        "Proclus": [EventType.MIDDAY, EventType.SUNSET],
+        "Rupes Recta": [EventType.SUNRISE, EventType.SUNSET],
+        "Tycho": [EventType.SUNRISE, EventType.MIDDAY, EventType.SUNSET],
+    }
+
+    alt_events = []
+    for name, altitude in alt_dict.items():
+        event_types = events[name]
+        event = None
+        for event_type in event_types:
+            if (
+                event_type == EventType.SUNRISE
+                and altitude >= sunrise_angle
+                and altitude <= sunrise_angle + event_window
+            ):
+                event = EventType.SUNRISE
+            if (
+                event_type == EventType.SUNSET
+                and altitude >= sunset_angle - event_window
+                and altitude <= sunset_angle
+            ):
+                event = EventType.SUNSET
+            if (
+                event_type == EventType.MIDDAY
+                and altitude >= midday_angle - event_window
+                and altitude <= midday_angle + event_window
+            ):
+                event = EventType.MIDDAY
+
+        alt_events.append((name, event, altitude))
+
+    return AltitudeEvents(events=alt_events)
 
 
 def check_full_moon_events(time_to_full: float, fractional_phase: float) -> PhaseEvents:
