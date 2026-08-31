@@ -45,4 +45,4 @@ def test_dashboard() -> None:
     assert dashboard_info["lunar_club"]["telescope"] == 0
     assert dashboard_info["lunar_two"]["features"] == 11
     assert dashboard_info["lunar_two"]["landing_sites"] == 16
-    assert dashboard_info["lunar_two"]["altitudes"] == 0
+    assert not dashboard_info["lunar_two"]["altitude_events"]

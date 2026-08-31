@@ -32,4 +32,4 @@ class LunarTwo(BaseModel):
 
     features: int
     landing_sites: int
-    altitudes: int
+    altitude_events: bool = False
