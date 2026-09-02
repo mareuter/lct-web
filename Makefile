@@ -16,7 +16,7 @@ clean:
 
 .PHONY: docker-build
 docker-build:
-	docker build . --rm -t lct-web:latest
+	docker build . --rm -t ghcr.io/mareuter/lct-web:develop
 
 .PHONY: docker-run
 docker-run:
