@@ -45,7 +45,7 @@ def dashboard(params: DateLocDeps) -> DashboardResponse:
             lc_ne += 1
         if feature.lunar_club_type == "Binocular":
             lc_bino += 1
-        if feature.lunar_club_type == "Telescope":
+        if feature.lunar_club_type == "Telescopic":
             lc_tel += 1
 
     lfc2 = LunarFeatureContainer("LunarII")
