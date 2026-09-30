@@ -13,6 +13,6 @@ jobs:
         python:
           - "3.11"
           - "3.12"
-    uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@4d3ff44bf28704bf797800a3ca3b14cdbec37066 # main
+    uses: mareuter/shared-workflows/.github/workflows/uv-python-ci.yaml@6842eb7a58bbb8ac3a3620df50eb0c1973a72a51 # main
     with:
       python-version: ${{ matrix.python }}
