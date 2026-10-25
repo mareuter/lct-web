@@ -20,7 +20,7 @@ from fastapi.openapi.utils import get_openapi
 
 from . import __version__
 from .models.index_response import IndexResponse
-from .routers import dashboard, lunar_club, lunar_two, moon_info
+from .routers import dashboard, features, lunar_club, lunar_two, moon_info
 
 __all__ = ["app"]
 
@@ -34,6 +34,7 @@ app.add_middleware(
 )
 
 app.include_router(dashboard.router)
+app.include_router(features.router)
 app.include_router(moon_info.router)
 app.include_router(lunar_club.router)
 app.include_router(lunar_two.router)
