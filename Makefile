@@ -20,7 +20,7 @@ docker-build:
 
 .PHONY: docker-run
 docker-run:
-	docker run --rm --name lct-web -p 8000:8000 lct-web:latest
+	docker run --rm --name lct-web -p 8000:8000 ghcr.io/mareuter/lct-web:develop
 
 .PHONY: init
 init:
