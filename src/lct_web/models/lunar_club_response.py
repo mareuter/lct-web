@@ -14,7 +14,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from ..pkg_types import FeatureDict
+from ..models.special_events import PhaseEvents, TimeEvents
+from ..pkg_types import FeatureList
 
 __all__ = ["LunarClubResponse"]
 
@@ -22,10 +23,8 @@ __all__ = ["LunarClubResponse"]
 class LunarClubResponse(BaseModel):
     """Response model for the lunar_club route."""
 
-    time_from_new_moon: float
-    time_to_new_moon: float
-    time_to_full_moon: float
-    fractional_phase: float
-    naked_eye_features: FeatureDict
-    binocular_features: FeatureDict
-    telescope_features: FeatureDict
+    time_events: TimeEvents
+    phase_events: PhaseEvents
+    naked_eye_features: FeatureList
+    binocular_features: FeatureList
+    telescope_features: FeatureList
