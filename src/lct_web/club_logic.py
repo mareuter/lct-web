@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 from pylunar import AltitudeDict
 
@@ -40,10 +40,10 @@ def check_altitude_events(alt_dict: AltitudeDict) -> AltitudeEvents:
     midday_angle = 90.0  # degrees
     sunset_angle = 180.0  # degrees
 
-    class EventType(Enum):
-        SUNRISE = 1
-        MIDDAY = 2
-        SUNSET = 3
+    class EventType(StrEnum):
+        SUNRISE = "Sunrise"
+        MIDDAY = "MidDay"
+        SUNSET = "Sunset"
 
     events = {
         "Byrgius A": [EventType.SUNRISE, EventType.MIDDAY, EventType.SUNSET],

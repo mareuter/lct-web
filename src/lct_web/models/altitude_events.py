@@ -20,7 +20,7 @@ __all__ = ["AltitudeEvents"]
 class AltitudeEvents(BaseModel):
     """Model for altitude events in Lunar II Club."""
 
-    events: list[tuple[str, int | None, float]]
+    events: list[tuple[str, str | None, float]]
 
     def isActive(self) -> bool:
         """Determine if any of the altitude events are active.

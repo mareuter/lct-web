@@ -15,6 +15,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 from pylunar import AltitudeDict, LunarFeatureContainer, MoonInfo
 
+from ..club_logic import check_altitude_events
 from ..dependencies import DateLocDeps
 from ..helpers import format_date_and_location
 from ..models.lunar_two_response import LunarTwoResponse
@@ -40,13 +41,14 @@ def lunar_two(params: DateLocDeps) -> LunarTwoResponse:
 
     ad = AltitudeDict()
     ad.load(moon_info)
+    alt_events = check_altitude_events(ad)
 
-    features = {}
-    landing_sites = {}
+    features = []
+    landing_sites = []
     for i, feature in enumerate(lfc):
         if feature.feature_type == "Landing Site":
-            landing_sites[str(i)] = feature.list_from_feature()
+            landing_sites.append((i, feature.name))
         else:
-            features[str(i)] = feature.list_from_feature()
+            features.append((i, feature.name))
 
-    return LunarTwoResponse(features=features, landing_sites=landing_sites, altitudes=ad)
+    return LunarTwoResponse(features=features, landing_sites=landing_sites, altitude_events=alt_events)

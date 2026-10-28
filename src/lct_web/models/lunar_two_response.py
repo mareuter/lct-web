@@ -14,7 +14,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from ..pkg_types import AltitudeDict, FeatureDict
+from ..models.altitude_events import AltitudeEvents
+from ..pkg_types import FeatureList
 
 __all__ = ["LunarTwoResponse"]
 
@@ -22,6 +23,6 @@ __all__ = ["LunarTwoResponse"]
 class LunarTwoResponse(BaseModel):
     """Response model for the lunar_two route."""
 
-    features: FeatureDict
-    landing_sites: FeatureDict
-    altitudes: AltitudeDict
+    features: FeatureList
+    landing_sites: FeatureList
+    altitude_events: AltitudeEvents

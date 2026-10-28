@@ -14,10 +14,11 @@ from __future__ import annotations
 
 from pylunar.pkg_types import DateTimeTuple, LunarFeatureList
 
-__all__ = ["AltitudeDict", "FeatureDict", "FeaturesDict", "NextFourPhases", "RiseSetTimes"]
+__all__ = ["AltitudeDict", "FeatureDict", "FeaturesDict", "FeatureList", "NextFourPhases", "RiseSetTimes"]
 
 AltitudeDict = dict[str, float]
+FeatureList = list[tuple[int, str]]
 FeatureDict = dict[str, LunarFeatureList]
-FeaturesDict = dict[str, list[tuple[int, str]]]
+FeaturesDict = dict[str, FeatureList]
 NextFourPhases = dict[str, dict[str, str | DateTimeTuple]]
 RiseSetTimes = dict[str, dict[str, str | DateTimeTuple]]
